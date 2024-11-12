@@ -1,4 +1,19 @@
+$color-green: #069a06;
+$color-yellow: #fd0;
+$color-red: #d60000;
+
+.app.status-game-over {
+    overflow: hidden;
+}
+
 .page-title {
+    text-align: center;
+    font-size: 60px;
+    margin: 20px;
+    margin-bottom: 40px;
+}
+
+.page-title span {
     background: linear-gradient(
         90deg,
         rgba(131, 58, 180, 1) 0%,
@@ -8,11 +23,7 @@
     background-clip: text;
     -moz-background-clip: text;
     -webkit-background-clip: text;
-    text-align: center;
-    font-size: 60px;
     color: transparent;
-    margin: 20px;
-    margin-bottom: 40px;
 }
 
 .words {
@@ -37,6 +48,27 @@
 
 .letterbox.has-letter {
     border-color: #888;
+}
+
+.letterbox.key-green,
+.letterbox.key-yellow,
+.letterbox.key-red {
+    color: #fff;
+}
+
+.letterbox.key-green {
+    border-color: $color-green;
+    background-color: $color-green;
+}
+
+.letterbox.key-yellow {
+    border-color: $color-yellow;
+    background-color: $color-yellow;
+}
+
+.letterbox.key-red {
+    border-color: $color-red;
+    background-color: $color-red;
 }
 
 .letter-container {
@@ -68,12 +100,10 @@
     width: 100%;
 }
 
-$key-background-color: #fd0;
 .keyboard-key {
     transition: all 0.15s ease-out;
     cursor: pointer;
-    position: relative;
-    background-color: $key-background-color;
+    background-color: $color-yellow;
     font-size: 35px;
     height: 70px;
     aspect-ratio: 1/1;
@@ -83,15 +113,7 @@ $key-background-color: #fd0;
 }
 
 .keyboard-key:hover {
-    background-color: darken($key-background-color, 5%);
-}
-
-.keyboard-key span {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    background-color: darken($color-yellow, 5%);
 }
 
 .keyboard-key.key-backspace,
@@ -102,4 +124,23 @@ $key-background-color: #fd0;
 
 .keyboard-key.key-enter {
     width: 150px;
+}
+
+.game-over {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #0000005f;
+    width: 100%;
+    height: 100%;
+}
+
+.game-over .window {
+    background: white;
+    width: 50%;
+    border-radius: 10px;
+    padding: 20px;
 }

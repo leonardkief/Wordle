@@ -1,6 +1,15 @@
-function Letterbox({ letter, status }) {
+function Letterbox({ letter, color }) {
     return (
-        <div className={"letterbox" + (letter ? " has-letter" : "")}>
+        <div
+            className={
+                "letterbox" +
+                (letter && !color
+                    ? " has-letter"
+                    : color
+                    ? " key-" + color
+                    : "")
+            }
+        >
             <span className="letter-container">{letter}</span>
         </div>
     )
