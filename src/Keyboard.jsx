@@ -14,7 +14,7 @@ function Keyboard({ onKeyPress }) {
                             <button
                                 key={key}
                                 className={
-                                    "keyboard-key" +
+                                    "btn btn-primary keyboard-key" +
                                     (key === "Backspace"
                                         ? " key-backspace"
                                         : "") +

@@ -2,6 +2,31 @@ $color-green: #069a06;
 $color-yellow: #fd0;
 $color-red: #d60000;
 
+.btn {
+    transition: all 150ms ease-out;
+    cursor: pointer;
+    font-size: 16px;
+    border: 0;
+    border-radius: 5px;
+    padding: 8px 16px;
+
+    &:hover {
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    }
+
+    &.btn-primary {
+        background-color: $color-yellow;
+
+        &:hover {
+            background-color: darken($color-yellow, 5%);
+        }
+
+        &:active {
+            background-color: darken($color-yellow, 10%);
+        }
+    }
+}
+
 .app.status-game-over {
     overflow: hidden;
 }
@@ -103,17 +128,12 @@ $color-red: #d60000;
 .keyboard-key {
     transition: all 0.15s ease-out;
     cursor: pointer;
-    background-color: $color-yellow;
     font-size: 35px;
     height: 70px;
     aspect-ratio: 1/1;
     border: none;
     border-radius: 5px;
     padding: 10px;
-}
-
-.keyboard-key:hover {
-    background-color: darken($color-yellow, 5%);
 }
 
 .keyboard-key.key-backspace,
@@ -143,4 +163,9 @@ $color-red: #d60000;
     width: 50%;
     border-radius: 10px;
     padding: 20px;
+
+    h1,
+    p {
+        margin-bottom: 20px;
+    }
 }

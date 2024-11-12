@@ -8,26 +8,41 @@ import GameOver from "./GameOver"
 const UPPERCASE_LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 const SPECIAL_CHARS = "ÄÖÜ"
 
-const CORRECT_WORD = "Hallo".toUpperCase()
-
 function copyWords(words) {
     return [...words.map((word) => ({ ...word }))]
 }
 
 function App() {
-    // const [words, setWords] = useState(["", "", "", "", "", ""])
+    // const correctWord = "Hallo".toUpperCase()
+    const [correctWord, setCorrectWord] = useState("Hallo".toUpperCase())
     const [words, setWords] = useState([
-        { word: "", entered: undefined },
-        { word: "", entered: undefined },
-        { word: "", entered: undefined },
-        { word: "", entered: undefined },
-        { word: "", entered: undefined },
-        { word: "", entered: undefined },
+        { word: "", entered: false },
+        { word: "", entered: false },
+        { word: "", entered: false },
+        { word: "", entered: false },
+        { word: "", entered: false },
+        { word: "", entered: false },
     ])
     const [entryLocked, setEntryLocked] = useState(false)
     const [gameOver, setGameOver] = useState(false)
     const [wordIdx, setWordIdx] = useState(0)
     const wordLength = 5
+    const [wonGame, setWonGame] = useState(false)
+
+    function initGame() {
+        setCorrectWord("Hallo".toUpperCase())
+        setEntryLocked(false)
+        setGameOver(false)
+        setWords([
+            { word: "", entered: false },
+            { word: "", entered: false },
+            { word: "", entered: false },
+            { word: "", entered: false },
+            { word: "", entered: false },
+            { word: "", entered: false },
+        ])
+        setWordIdx(0)
+    }
 
     // function handleKeyDown(key) {
     //     if (entryLocked) return
@@ -83,13 +98,6 @@ function App() {
         } else if (key === "Enter") {
             if (currentWord.length !== 5) return
 
-            if (currentWord === CORRECT_WORD) {
-                setEntryLocked(true)
-                setGameOver(true)
-
-                return
-            }
-
             setWords((prevWords) => {
                 const newWords = copyWords(prevWords)
                 newWords[wordIdx].entered = true
@@ -97,6 +105,15 @@ function App() {
                 return newWords
             })
             setWordIdx((prevIdx) => prevIdx + 1)
+
+            if (currentWord === correctWord) {
+                setEntryLocked(true)
+                setGameOver(true)
+                setWonGame(true)
+            } else if (wordIdx === words.length - 1) {
+                setEntryLocked(true)
+                setGameOver(true)
+            }
         } else if (
             (UPPERCASE_LETTERS + SPECIAL_CHARS).includes(key.toUpperCase())
         ) {
@@ -127,10 +144,16 @@ function App() {
                 <Words
                     words={words}
                     length={wordLength}
-                    correctWord={CORRECT_WORD}
+                    correctWord={correctWord}
                 />
                 <Keyboard onKeyPress={handleKeyDown} />
-                {gameOver && <GameOver />}
+                {gameOver && (
+                    <GameOver
+                        correctWord={correctWord}
+                        startNewGame={initGame}
+                        wonGame={wonGame}
+                    />
+                )}
             </main>
         </div>
     )

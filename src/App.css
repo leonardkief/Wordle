@@ -1,3 +1,24 @@
+.btn {
+  transition: all 150ms ease-out;
+  cursor: pointer;
+  font-size: 16px;
+  border: 0;
+  border-radius: 5px;
+  padding: 8px 16px;
+}
+.btn:hover {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+.btn.btn-primary {
+  background-color: #fd0;
+}
+.btn.btn-primary:hover {
+  background-color: #e6c700;
+}
+.btn.btn-primary:active {
+  background-color: #ccb100;
+}
+
 .app.status-game-over {
   overflow: hidden;
 }
@@ -94,17 +115,12 @@
 .keyboard-key {
   transition: all 0.15s ease-out;
   cursor: pointer;
-  background-color: #fd0;
   font-size: 35px;
   height: 70px;
   aspect-ratio: 1/1;
   border: none;
   border-radius: 5px;
   padding: 10px;
-}
-
-.keyboard-key:hover {
-  background-color: #e6c700;
 }
 
 .keyboard-key.key-backspace,
@@ -134,4 +150,8 @@
   width: 50%;
   border-radius: 10px;
   padding: 20px;
+}
+.game-over .window h1,
+.game-over .window p {
+  margin-bottom: 20px;
 }
