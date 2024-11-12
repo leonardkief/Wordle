@@ -1,0 +1,98 @@
+.page-title {
+    text-align: center;
+    margin: 20px;
+    margin-bottom: 40px;
+}
+
+.page-title span {
+    background: linear-gradient(
+        to right,
+        rgb(131, 58, 180) 0%,
+        rgb(253, 29, 29) 50%,
+        rgb(255, 149, 0) 100%
+    );
+    background-clip: text;
+    -moz-background-clip: text;
+    -webkit-background-clip: text;
+    font-size: 60px;
+    color: transparent;
+}
+
+.words {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 10px;
+    margin-bottom: 40px;
+}
+
+.words-row {
+    display: flex;
+    gap: 8px;
+}
+
+.letterbox {
+    position: relative;
+    border: 3px solid #ddd;
+    width: 70px;
+    aspect-ratio: 1/1;
+}
+
+.letterbox.has-letter {
+    border-color: #888;
+}
+
+.letter-container {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+    font-weight: 300;
+    width: 100%;
+    height: 100%;
+}
+
+.keyboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.keyboard,
+.keyboard-row {
+    gap: 10px;
+}
+
+.keyboard-row {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.keyboard-key {
+    transition: all 0.15s ease-out;
+    cursor: pointer;
+    background-color: #fd0;
+    font-size: 35px;
+    height: 65px;
+    aspect-ratio: 1/1;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.keyboard-key:hover {
+    background-color: #e6c700;
+}
+
+.keyboard-key.key-backspace,
+.keyboard-key.key-enter {
+    width: 120px;
+    font-size: 25px;
+}
+
+.keyboard-key.key-enter {
+    width: 150px;
+}
