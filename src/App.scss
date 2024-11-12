@@ -51,6 +51,50 @@ $color-red: #d60000;
     color: transparent;
 }
 
+.loading-symbol {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+    animation: rotation 1s linear infinite;
+
+    .circle {
+        overflow: hidden;
+
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50px;
+        aspect-ratio: 1/1;
+        border-radius: 50%;
+        background-color: #eee;
+    }
+
+    .circle-segment {
+        position: absolute;
+        background-color: #888;
+        // width: 100%;
+        aspect-ratio: 1/1;
+    }
+
+    .center-cover {
+        position: absolute;
+        width: 80%;
+        aspect-ratio: 1/1;
+        border-radius: 50%;
+        background-color: #fff;
+    }
+}
+
+@keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 .words {
     display: flex;
     flex-direction: column;
@@ -134,16 +178,16 @@ $color-red: #d60000;
     border: none;
     border-radius: 5px;
     padding: 10px;
-}
 
-.keyboard-key.key-backspace,
-.keyboard-key.key-enter {
-    width: 120px;
-    font-size: 25px;
-}
+    &.key-backspace,
+    &.key-enter {
+        width: 120px;
+        font-size: 25px;
+    }
 
-.keyboard-key.key-enter {
-    width: 150px;
+    &.key-enter {
+        width: 150px;
+    }
 }
 
 .game-over {
@@ -162,7 +206,7 @@ $color-red: #d60000;
     background: white;
     width: 50%;
     border-radius: 10px;
-    padding: 20px;
+    padding: 40px;
 
     h1,
     p {

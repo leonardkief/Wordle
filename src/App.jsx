@@ -1,9 +1,10 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 import "./App.css"
 import Keyboard from "./Keyboard"
 import Words from "./Words"
 import GameOver from "./GameOver"
+import LoadingSymbol from "./LoadingSymbol"
 
 const UPPERCASE_LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 const SPECIAL_CHARS = "ÄÖÜ"
@@ -12,9 +13,13 @@ function copyWords(words) {
     return [...words.map((word) => ({ ...word }))]
 }
 
+// function choice(list) {
+//     return list[Math.floor(Math.random() * list.length)]
+// }
+
 function App() {
     // const correctWord = "Hallo".toUpperCase()
-    const [correctWord, setCorrectWord] = useState("Hallo".toUpperCase())
+    const [correctWord, setCorrectWord] = useState(null)
     const [words, setWords] = useState([
         { word: "", entered: false },
         { word: "", entered: false },
@@ -23,15 +28,28 @@ function App() {
         { word: "", entered: false },
         { word: "", entered: false },
     ])
-    const [entryLocked, setEntryLocked] = useState(false)
+    const [entryLocked, setEntryLocked] = useState(true)
     const [gameOver, setGameOver] = useState(false)
     const [wordIdx, setWordIdx] = useState(0)
     const wordLength = 5
     const [wonGame, setWonGame] = useState(false)
 
+    useEffect(() => {
+        const newWord = "Hallo"
+        setTimeout(() => {
+            setCorrectWord(newWord.toUpperCase())
+            setEntryLocked(false)
+        }, 500)
+    })
+
     function initGame() {
-        setCorrectWord("Hallo".toUpperCase())
-        setEntryLocked(false)
+        setCorrectWord(null)
+        setEntryLocked(true)
+        setTimeout(() => {
+            setCorrectWord("Hallo".toUpperCase())
+            setEntryLocked(false)
+        }, 500)
+
         setGameOver(false)
         setWords([
             { word: "", entered: false },
@@ -141,11 +159,19 @@ function App() {
                 </h1>
             </header>
             <main>
-                <Words
-                    words={words}
-                    length={wordLength}
-                    correctWord={correctWord}
-                />
+                <p style={{ textAlign: "center", marginBottom: "20px" }}>
+                    Correct Word: {correctWord}
+                </p>
+                {/* <LoadingSymbol /> */}
+                {correctWord ? (
+                    <Words
+                        words={words}
+                        length={wordLength}
+                        correctWord={correctWord}
+                    />
+                ) : (
+                    <LoadingSymbol />
+                )}
                 <Keyboard onKeyPress={handleKeyDown} />
                 {gameOver && (
                     <GameOver
