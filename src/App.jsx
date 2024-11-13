@@ -9,56 +9,45 @@ import LoadingSymbol from "./LoadingSymbol"
 const UPPERCASE_LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 const SPECIAL_CHARS = "ÄÖÜ"
 
+const WORDS = ["Hallo", "React", "Words", "Alpha"]
+
 function copyWords(words) {
     return [...words.map((word) => ({ ...word }))]
 }
 
-// function choice(list) {
-//     return list[Math.floor(Math.random() * list.length)]
-// }
+function choice(list) {
+    return list[Math.floor(Math.random() * list.length)]
+}
 
 function App() {
-    // const correctWord = "Hallo".toUpperCase()
+    const wordLength = 5
+    const triesCount = 6
+
     const [correctWord, setCorrectWord] = useState(null)
-    const [words, setWords] = useState([
-        { word: "", entered: false },
-        { word: "", entered: false },
-        { word: "", entered: false },
-        { word: "", entered: false },
-        { word: "", entered: false },
-        { word: "", entered: false },
-    ])
+    const [words, setWords] = useState(null)
     const [entryLocked, setEntryLocked] = useState(true)
     const [gameOver, setGameOver] = useState(false)
     const [wordIdx, setWordIdx] = useState(0)
-    const wordLength = 5
     const [wonGame, setWonGame] = useState(false)
 
     useEffect(() => {
-        const newWord = "Hallo"
-        setTimeout(() => {
-            setCorrectWord(newWord.toUpperCase())
-            setEntryLocked(false)
-        }, 500)
-    })
+        initGame()
+    }, [])
 
     function initGame() {
         setCorrectWord(null)
         setEntryLocked(true)
-        setTimeout(() => {
-            setCorrectWord("Hallo".toUpperCase())
-            setEntryLocked(false)
-        }, 500)
+
+        const newWord = choice(WORDS)
+        setCorrectWord(newWord.toUpperCase())
+        setEntryLocked(false)
 
         setGameOver(false)
-        setWords([
-            { word: "", entered: false },
-            { word: "", entered: false },
-            { word: "", entered: false },
-            { word: "", entered: false },
-            { word: "", entered: false },
-            { word: "", entered: false },
-        ])
+        const newWords = []
+        for (let i = 0; i < triesCount; i++) {
+            newWords.push({ word: "", entered: false })
+        }
+        setWords(newWords)
         setWordIdx(0)
     }
 
@@ -163,7 +152,7 @@ function App() {
                     Correct Word: {correctWord}
                 </p>
                 {/* <LoadingSymbol /> */}
-                {correctWord ? (
+                {correctWord && words ? (
                     <Words
                         words={words}
                         length={wordLength}
